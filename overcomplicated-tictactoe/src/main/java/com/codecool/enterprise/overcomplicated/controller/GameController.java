@@ -45,8 +45,9 @@ public class GameController {
 
     @GetMapping(value = "/game")
     public String gameView(@ModelAttribute("player") Player player, Model model) {
-        model.addAttribute("funfact", "&quot;Chuck Norris knows the last digit of pi.&quot;");
         model.addAttribute("comic_uri", "https://imgs.xkcd.com/comics/bad_code.png");
+        model.addAttribute("gameState", game.getGameState());
+        model.addAttribute("funFact", funFactService.getFunFact());
         return "game";
     }
 
@@ -54,5 +55,10 @@ public class GameController {
     public String gameMove(@ModelAttribute("player") Player player, @ModelAttribute("move") int move) {
         System.out.println("Player moved " + move);
         return "redirect:/game";
+    }
+
+    @GetMapping(value = "/new_fun_fact")
+    public @ResponseBody String getNewFunFact() {
+        return funFactService.getFunFact();
     }
 }
