@@ -1,9 +1,19 @@
 package com.codecool.enterprise.overcomplicated.model;
 
-import java.net.URI;
-
 public class Player {
-    String userName = "Anonymous";
+    protected String character;
+    protected String userName;
+    protected TicTacToeGame game;
+
+
+    public Player(String character, String userName) {
+        this.character = character;
+        this.userName = userName;
+    }
+
+    public void setGame(TicTacToeGame game) {
+        this.game = game;
+    }
 
     public String getUserName() {
         return userName;
@@ -11,5 +21,9 @@ public class Player {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public void move(int position) {
+        game.changeGameState(position, character);
     }
 }
