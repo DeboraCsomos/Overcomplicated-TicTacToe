@@ -10,6 +10,9 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/darkly/bootstrap.min.css" rel="stylesheet" integrity="sha384-S7YMK1xjUjSpEnF4P8hPUcgjXYLZKK3fQW1j5ObLSl787II9p8RO9XUGehRmKsxd" crossorigin="anonymous"/>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"/>
     <link href="/style.css" rel="stylesheet" />
+    <!--<script src="https://code.jquery.com/jquery-3.1.1.min.js"-->
+            <!--integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>-->
+    <!--<script type="application/javascript" src="/game.js" defer="true"></script>-->
 </head>
 <body>
     <div class="container">
@@ -48,35 +51,71 @@
                 <div class="container-fluid game-container">
                     <div class="row">
                         <div class="col-xs-4">
-                            <a href="/game-move?move=0" class="btn btn-default square">&nbsp;</a>
+                            <th:block th:switch="${gameState[0]}">
+                            <a th:case="null" href="/game-move?move=0" class="btn btn-default square">&nbsp;</a>
+                            <a th:case="O" href="/game-move?move=0" class="btn btn-default square"><i class="fa fa-circle-o" aria-hidden="true"></i></a>
+                            <a th:case="X" href="/game-move?move=0" class="btn btn-default square"><i class="fa fa-times" aria-hidden="true"></i></a>
+                            </th:block>
                         </div>
                         <div class="col-xs-4">
-                            <a href="/game-move?move=1" class="btn btn-default square"><i class="fa fa-circle-o" aria-hidden="true"></i></a>
+                            <th:block th:switch="${gameState[1]}">
+                                <a th:case="null" href="/game-move?move=1" class="btn btn-default square">&nbsp;</a>
+                                <a th:case="O" href="/game-move?move=1" class="btn btn-default square"><i class="fa fa-circle-o" aria-hidden="true"></i></a>
+                                <a th:case="X" href="/game-move?move=1" class="btn btn-default square"><i class="fa fa-times" aria-hidden="true"></i></a>
+                            </th:block>
                         </div>
                         <div class="col-xs-4">
-                            <a href="/game-move?move=2" class="btn btn-default square"><i class="fa fa-times" aria-hidden="true"></i></a>
+                            <th:block th:switch="${gameState[2]}">
+                                <a th:case="null" href="/game-move?move=2" class="btn btn-default square">&nbsp;</a>
+                                <a th:case="O" href="/game-move?move=2" class="btn btn-default square"><i class="fa fa-circle-o" aria-hidden="true"></i></a>
+                                <a th:case="X" href="/game-move?move=2" class="btn btn-default square"><i class="fa fa-times" aria-hidden="true"></i></a>
+                            </th:block>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-4">
-                            <a href="/game-move?move=3" class="btn btn-default square">&nbsp;</a>
+                            <th:block th:switch="${gameState[3]}">
+                                <a th:case="null" href="/game-move?move=3" class="btn btn-default square">&nbsp;</a>
+                                <a th:case="O" href="/game-move?move=3" class="btn btn-default square"><i class="fa fa-circle-o" aria-hidden="true"></i></a>
+                                <a th:case="X" href="/game-move?move=3" class="btn btn-default square"><i class="fa fa-times" aria-hidden="true"></i></a>
+                            </th:block>
                         </div>
                         <div class="col-xs-4">
-                            <a href="/game-move?move=4" class="btn btn-default square">&nbsp;</a>
+                            <th:block th:switch="${gameState[4]}">
+                                <a th:case="null" href="/game-move?move=4" class="btn btn-default square">&nbsp;</a>
+                                <a th:case="O" href="/game-move?move=4" class="btn btn-default square"><i class="fa fa-circle-o" aria-hidden="true"></i></a>
+                                <a th:case="X" href="/game-move?move=4" class="btn btn-default square"><i class="fa fa-times" aria-hidden="true"></i></a>
+                            </th:block>
                         </div>
                         <div class="col-xs-4">
-                            <a href="/game-move?move=5" class="btn btn-default square">&nbsp;</a>
+                            <th:block th:switch="${gameState[5]}">
+                                <a th:case="null" href="/game-move?move=5" class="btn btn-default square">&nbsp;</a>
+                                <a th:case="O" href="/game-move?move=5" class="btn btn-default square"><i class="fa fa-circle-o" aria-hidden="true"></i></a>
+                                <a th:case="X" href="/game-move?move=5" class="btn btn-default square"><i class="fa fa-times" aria-hidden="true"></i></a>
+                            </th:block>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-4">
-                            <a href="/game-move?move=6" class="btn btn-default square">&nbsp;</a>
+                            <th:block th:switch="${gameState[6]}">
+                                <a th:case="null" href="/game-move?move=6" class="btn btn-default square">&nbsp;</a>
+                                <a th:case="O" href="/game-move?move=6" class="btn btn-default square"><i class="fa fa-circle-o" aria-hidden="true"></i></a>
+                                <a th:case="X" href="/game-move?move=6" class="btn btn-default square"><i class="fa fa-times" aria-hidden="true"></i></a>
+                            </th:block>
                         </div>
                         <div class="col-xs-4">
-                            <a href="/game-move?move=7" class="btn btn-default square">&nbsp;</a>
+                            <th:block th:switch="${gameState[7]}">
+                                <a th:case="null" href="/game-move?move=7" class="btn btn-default square">&nbsp;</a>
+                                <a th:case="O" href="/game-move?move=7" class="btn btn-default square"><i class="fa fa-circle-o" aria-hidden="true"></i></a>
+                                <a th:case="X" href="/game-move?move=7" class="btn btn-default square"><i class="fa fa-times" aria-hidden="true"></i></a>
+                            </th:block>
                         </div>
                         <div class="col-xs-4">
-                            <a href="/game-move?move=8" class="btn btn-default square">&nbsp;</a>
+                            <th:block th:switch="${gameState[8]}">
+                                <a th:case="null" href="/game-move?move=8" class="btn btn-default square">&nbsp;</a>
+                                <a th:case="O" href="/game-move?move=8" class="btn btn-default square"><i class="fa fa-circle-o" aria-hidden="true"></i></a>
+                                <a th:case="X" href="/game-move?move=8" class="btn btn-default square"><i class="fa fa-times" aria-hidden="true"></i></a>
+                            </th:block>
                         </div>
                     </div>
                 </div>
@@ -86,7 +125,8 @@
                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#changeNameModal">
                         Change name
                     </button>
-                    <p class="lead funfact" th:utext="${funfact}"></p>
+                    <p class="lead funfact" th:utext="${funFact}"></p>
+                    <button><a href="/new_fun_fact">Get new fun fact</a></button>
                 </div>
             </div>
         </div>
