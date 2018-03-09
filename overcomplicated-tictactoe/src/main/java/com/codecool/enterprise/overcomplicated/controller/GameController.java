@@ -10,14 +10,20 @@ import org.springframework.web.bind.annotation.*;
 @SessionAttributes({"player", "game"})
 public class GameController {
 
+    @Autowired
+    private TicTacToeGame game;
+
+    @Autowired
+    private FunFactService funFactService;
+
     @ModelAttribute("player")
     public Player getPlayer() {
-        return new Player();
+        return game.getPlayers().get("player");
     }
 
     @ModelAttribute("game")
-    public TictactoeGame getGame() {
-        return new TictactoeGame();
+    public TicTacToeGame getGame() {
+        return game;
     }
 
     @ModelAttribute("avatar_uri")
