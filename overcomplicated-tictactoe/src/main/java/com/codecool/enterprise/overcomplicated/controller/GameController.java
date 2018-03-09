@@ -52,8 +52,10 @@ public class GameController {
     }
 
     @GetMapping(value = "/game-move")
-    public String gameMove(@ModelAttribute("player") Player player, @ModelAttribute("move") int move) {
-        System.out.println("Player moved " + move);
+    public String gameMove(@ModelAttribute("player") Player player, @ModelAttribute("move") int move, Model model) {
+        player.move(move);
+        game.getComputer().move();
+        model.addAttribute("gameState", game.getGameState());
         return "redirect:/game";
     }
 
