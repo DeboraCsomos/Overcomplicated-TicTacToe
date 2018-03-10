@@ -18,9 +18,9 @@ public class Computer {
     }
 
     public ArrayList<String> move(ArrayList<String> board) {
-        for (String pos : board) {
-            if (pos == null) {
-                pos = character;
+        for (int i = 0; i < board.size(); i++) {
+            if (board.get(i) == null) {
+                board.set(i, character);
                 break;
             }
         }
