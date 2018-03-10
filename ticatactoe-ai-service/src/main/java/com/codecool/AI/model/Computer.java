@@ -19,7 +19,7 @@ public class Computer {
 
     public ArrayList<String> move(ArrayList<String> board) {
         for (int i = 0; i < board.size(); i++) {
-            if (board.get(i) == null) {
+            if (board.get(i).isEmpty()) {
                 board.set(i, character);
                 break;
             }
