@@ -2,11 +2,14 @@ package com.codecool.enterprise.overcomplicated.controller;
 
 import com.codecool.enterprise.overcomplicated.model.Player;
 import com.codecool.enterprise.overcomplicated.model.TicTacToeGame;
+import com.codecool.enterprise.overcomplicated.service.AIService;
 import com.codecool.enterprise.overcomplicated.service.FunFactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 @Controller
 @SessionAttributes({"player", "game"})
@@ -17,6 +20,9 @@ public class GameController {
 
     @Autowired
     private FunFactService funFactService;
+
+    @Autowired
+    private AIService aiService;
 
     @ModelAttribute("player")
     public Player getPlayer() {
@@ -38,7 +44,7 @@ public class GameController {
         return "welcome";
     }
 
-    @PostMapping(value="/changeplayerusername")
+    @PostMapping(value = "/changeplayerusername")
     public String changPlayerUserName(@ModelAttribute Player player) {
         return "redirect:/game";
     }
@@ -46,7 +52,7 @@ public class GameController {
     @GetMapping(value = "/game")
     public String gameView(@ModelAttribute("player") Player player, Model model) {
         model.addAttribute("comic_uri", "https://imgs.xkcd.com/comics/bad_code.png");
-        model.addAttribute("gameState", game.getGameState());
+        model.addAttribute("board", game.getBoard());
         model.addAttribute("funFact", funFactService.getFunFact());
         return "game";
     }
@@ -54,8 +60,8 @@ public class GameController {
     @GetMapping(value = "/game-move")
     public String gameMove(@ModelAttribute("player") Player player, @ModelAttribute("move") int move, Model model) {
         player.move(move);
-        game.getComputer().move();
-        model.addAttribute("gameState", game.getGameState());
+        ArrayList<String> board = aiService.moveAI(game.getBoard());
+        model.addAttribute("board", board);
         return "redirect:/game";
     }
 
