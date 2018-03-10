@@ -7,7 +7,7 @@ import java.util.*;
 @Component
 public class TicTacToeGame {
     private Map<String, Player> players = new HashMap<>();
-    private ArrayList<String> board = new ArrayList<>(9));
+    private ArrayList<String> board = new ArrayList<>(9);
 
     public TicTacToeGame() {
         Collections.fill(board, null);
