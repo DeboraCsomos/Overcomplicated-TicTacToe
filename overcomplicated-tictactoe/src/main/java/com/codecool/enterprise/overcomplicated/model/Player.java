@@ -24,6 +24,6 @@ public class Player {
     }
 
     public void move(int position) {
-        game.changeGameState(position, character);
+        game.changeBoard(position, character);
     }
 }
