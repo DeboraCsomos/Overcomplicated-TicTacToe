@@ -13,17 +13,12 @@ public class TicTacToeGame {
         Player player = new Player("X", "Anonymous");
         player.setGame(this);
         players.put("player", player);
-        Computer computer = new Computer("O", "computer");
-        computer.setGame(this);
-        players.put("computer", computer);
     }
 
     public Map<String, Player> getPlayers() {
         return players;
     }
 
-    public Computer getComputer() {
-        return (Computer) players.get("computer");
     public ArrayList<String> getBoard() {
         return board;
     }
