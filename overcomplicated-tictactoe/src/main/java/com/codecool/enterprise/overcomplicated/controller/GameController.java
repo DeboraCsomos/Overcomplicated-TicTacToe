@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 @Controller
@@ -58,10 +59,10 @@ public class GameController {
     }
 
     @GetMapping(value = "/game-move")
-    public String gameMove(@ModelAttribute("player") Player player, @ModelAttribute("move") int move, Model model) {
+    public String gameMove(@ModelAttribute("player") Player player, @ModelAttribute("move") int move, Model model) throws URISyntaxException {
         player.move(move);
-        ArrayList<String> board = aiService.moveAI(game.getBoard());
-        model.addAttribute("board", board);
+        game.setBoard(aiService.moveAI(game.getBoard()));
+        model.addAttribute("board", game.getBoard());
         return "redirect:/game";
     }
 
