@@ -62,8 +62,19 @@ public class GameController {
     public String gameMove(@ModelAttribute("player") Player player, @ModelAttribute("move") int move, Model model) throws URISyntaxException {
         player.move(move);
         game.setBoard(aiService.moveAI(game.getBoard()));
+        String winner = game.checkWinner();
+        Boolean isGameFinished = game.checkIsGameFinished();
+        if (winner != null) {
+            if (winner.equals("O")) {
+                model.addAttribute("winner", "computer");
+            } else if (winner.equals("X")) {
+                model.addAttribute("winner", player.getUserName());
+            }
+        } else if (isGameFinished) {
+            model.addAttribute("finished", true);
+        }
         model.addAttribute("board", game.getBoard());
-        return "redirect:/game";
+        return "game";
     }
 
     @GetMapping(value = "/new_fun_fact")
