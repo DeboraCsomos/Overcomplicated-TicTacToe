@@ -55,11 +55,7 @@ public class GameController {
 
     @PostMapping(value = "/change_player_username")
     public String changPlayerUserName(@ModelAttribute Player player) {
-        String newName = player.getUserName();
-        game.getPlayer().setUserName(newName);
-        String newAvatar = avatarService.getAvatarURI(newName);
-        game.getPlayer().setAvatar(newAvatar);
-        return "redirect:/";
+        return "redirect:/game";
     }
 
     @GetMapping(value = "/game")
