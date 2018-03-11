@@ -1,9 +1,10 @@
 package com.codecool.enterprise.overcomplicated.model;
 
 public class Player {
-    protected String character;
-    protected String userName;
-    protected TicTacToeGame game;
+    private String character;
+    private String userName;
+    private TicTacToeGame game;
+    private String avatar;
 
 
     public Player(String character, String userName) {
@@ -25,5 +26,13 @@ public class Player {
 
     public void move(int position) {
         game.changeBoard(position, character);
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getAvatar() {
+        return avatar;
     }
 }
