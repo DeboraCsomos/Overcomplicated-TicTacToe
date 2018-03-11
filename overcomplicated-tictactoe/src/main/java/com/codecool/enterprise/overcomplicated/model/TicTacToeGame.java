@@ -19,6 +19,10 @@ public class TicTacToeGame {
         return players;
     }
 
+    public Player getPlayer() {
+        return players.get("player");
+    }
+
     public ArrayList<String> getBoard() {
         return board;
     }
@@ -78,4 +82,5 @@ public class TicTacToeGame {
     public void emptyBoard() {
         Collections.fill(board,"");
     }
+
 }
