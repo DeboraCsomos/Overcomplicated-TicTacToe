@@ -23,7 +23,7 @@ import java.util.Random;
 public class ComicsController {
 
     @RequestMapping(value = "/new_comic", method = RequestMethod.GET)
-    public @ResponseBody String getComic() throws URISyntaxException {
+    public String getComic() throws URISyntaxException {
         Random rand = new Random();
         int randomNumber = rand.nextInt(1929) + 1;
         final URI URI = new URI(String.format("https://xkcd.com/%d/info.0.json", randomNumber));
