@@ -85,10 +85,7 @@ public class GameController {
         } else if (isGameFinished) {
             model.addAttribute("finished", true);
         }
-        model.addAttribute("board", game.getBoard());
-        model.addAttribute("funFact", getNewFunFact());
-        model.addAttribute("comic", getNewComic());
-        return "game";
+        return gameView(player, model);
     }
 
     @GetMapping(value = "/new_fun_fact")
