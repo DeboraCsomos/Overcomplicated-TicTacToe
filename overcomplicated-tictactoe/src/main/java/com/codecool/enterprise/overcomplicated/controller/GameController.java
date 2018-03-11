@@ -3,6 +3,7 @@ package com.codecool.enterprise.overcomplicated.controller;
 import com.codecool.enterprise.overcomplicated.model.Player;
 import com.codecool.enterprise.overcomplicated.model.TicTacToeGame;
 import com.codecool.enterprise.overcomplicated.service.AIService;
+import com.codecool.enterprise.overcomplicated.service.AvatarService;
 import com.codecool.enterprise.overcomplicated.service.ComicService;
 import com.codecool.enterprise.overcomplicated.service.FunFactService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,8 @@ public class GameController {
 
     @Autowired
     private ComicService comicService;
+    @Autowired
+    private AvatarService avatarService;
 
     @ModelAttribute("player")
     public Player getPlayer() {
@@ -42,9 +45,10 @@ public class GameController {
         return game;
     }
 
-    @ModelAttribute("avatar_uri")
+    @ModelAttribute("avatar")
     public String getAvatarUri() {
-        return "https://robohash.org/codecool";
+        Player player = game.getPlayer();
+        return avatarService.getAvatarURI(player.getUserName());
     }
 
     @GetMapping(value = "/")
@@ -52,9 +56,13 @@ public class GameController {
         return "welcome";
     }
 
-    @PostMapping(value = "/changeplayerusername")
+    @PostMapping(value = "/change_player_username")
     public String changPlayerUserName(@ModelAttribute Player player) {
-        return "redirect:/game";
+        String newName = player.getUserName();
+        game.getPlayer().setUserName(newName);
+        String newAvatar = avatarService.getAvatarURI(newName);
+        game.getPlayer().setAvatar(newAvatar);
+        return "redirect:/";
     }
 
     @GetMapping(value = "/game")
