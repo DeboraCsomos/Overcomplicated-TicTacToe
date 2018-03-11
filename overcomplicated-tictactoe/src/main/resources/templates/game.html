@@ -126,7 +126,6 @@
                         Change name
                     </button>
                     <p class="lead funfact" th:utext="${funFact}"></p>
-                    <button><a href="/new_fun_fact">Get new fun fact</a></button>
                 </div>
             </div>
         </div>
@@ -156,7 +155,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 text-center">
-                    <img th:src="${comic_uri}" alt="Comic placeholder"/>
+                    <img th:src="${comic.get('uri')}" th:alt="${comic.get('alt')}" th:title="${comic.get('title')}"/>
                 </div>
             </div>
         </div>
