@@ -18,18 +18,15 @@ import java.net.URISyntaxException;
 import java.util.Map;
 
 @Controller
-@SessionAttributes({"player", "game"})
+@SessionAttributes("game")
 public class GameController {
 
     @Autowired
     private TicTacToeGame game;
-
     @Autowired
     private FunFactService funFactService;
-
     @Autowired
     private AIService aiService;
-
     @Autowired
     private ComicService comicService;
     @Autowired
@@ -37,7 +34,7 @@ public class GameController {
 
     @ModelAttribute("player")
     public Player getPlayer() {
-        return game.getPlayers().get("player");
+        return game.getPlayer();
     }
 
     @ModelAttribute("game")
@@ -69,8 +66,7 @@ public class GameController {
     public String gameView(@ModelAttribute("player") Player player, Model model) {
         model.addAttribute("board", game.getBoard());
         model.addAttribute("funFact", getNewFunFact());
-        Map<String, String> comic = getNewComic();
-        model.addAttribute("comic", comic);
+        model.addAttribute("comic", getNewComic());
         return "game";
     }
 
@@ -90,6 +86,8 @@ public class GameController {
             model.addAttribute("finished", true);
         }
         model.addAttribute("board", game.getBoard());
+        model.addAttribute("funFact", getNewFunFact());
+        model.addAttribute("comic", getNewComic());
         return "game";
     }
 
