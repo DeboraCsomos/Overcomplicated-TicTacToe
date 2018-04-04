@@ -6,13 +6,11 @@ import com.codecool.enterprise.overcomplicated.service.AIService;
 import com.codecool.enterprise.overcomplicated.service.AvatarService;
 import com.codecool.enterprise.overcomplicated.service.ComicService;
 import com.codecool.enterprise.overcomplicated.service.FunFactService;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URISyntaxException;
 import java.util.Map;
@@ -61,7 +59,7 @@ public class GameController {
     @GetMapping(value = "/game")
     public String gameView(@ModelAttribute("player") Player player, Model model) {
         model.addAttribute("board", game.getBoard());
-        model.addAttribute("funFact", getNewFunFact());
+        model.addAttribute("funFact", funFactService.getFunFact());
         model.addAttribute("comic", getNewComic());
         return "game";
     }
@@ -84,9 +82,10 @@ public class GameController {
         return gameView(player, model);
     }
 
-    @GetMapping(value = "/new_fun_fact")
+    @GetMapping(value = "/new_fun_fact", produces = "application/json")
+    @ResponseBody
     public String getNewFunFact() {
-        return funFactService.getFunFact();
+        return new Gson().toJson(funFactService.getFunFact());
     }
 
     @GetMapping(value = "/new_comic")
