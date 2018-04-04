@@ -60,7 +60,7 @@ public class GameController {
     public String gameView(@ModelAttribute("player") Player player, Model model) {
         model.addAttribute("board", game.getBoard());
         model.addAttribute("funFact", funFactService.getFunFact());
-        model.addAttribute("comic", getNewComic());
+        model.addAttribute("comic", comicService.getComic());
         return "game";
     }
 
@@ -89,7 +89,8 @@ public class GameController {
     }
 
     @GetMapping(value = "/new_comic")
-    public Map<String, String> getNewComic() {
-        return comicService.getComic();
+    @ResponseBody
+    public String getNewComic() {
+        return new Gson().toJson(comicService.getComic());
     }
 }
