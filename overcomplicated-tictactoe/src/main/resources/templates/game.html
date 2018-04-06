@@ -77,7 +77,7 @@
         </div>
     </div>
 
-    <div id="finish-modal" th:class="${finished}? 'modal show' : (${winner}? 'modal show' : 'modal fade')">
+    <div id="finish-modal" class="modal fade">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -87,7 +87,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p th:text="${finished}? 'It\'s a draw!' : (${winner}? 'The Winner is ' + ${winner} )"></p>
+                    <p id="message"></p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary"><a href="/game">Start new game.</a></button>

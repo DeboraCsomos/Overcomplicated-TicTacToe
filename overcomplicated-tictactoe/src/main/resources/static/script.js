@@ -45,7 +45,6 @@ function comicEvent() {
 
 function squareClickEvent() {
     $(".square").on("click", function () {
-        let target = event.target;
         event.preventDefault();
         let position = $(this).attr("id");
         $.ajax({
@@ -70,9 +69,14 @@ function squareClickEvent() {
                     squares.each(function() {
                         $(this).addClass("inactive");
                     });
-                    $(target).addClass("fa fa-times");
-                    $("#finish-modal").modal("show");
-                    // return;
+                    let modal = $("#finish-modal");
+                    let messageDiv = modal.find("#message");
+                    if (response["winner"] != null) {
+                        messageDiv.text(`The winner is ${response["winner"]}!`);
+                    } else if (response["finished"]) {
+                        messageDiv.text("It's a draw!");
+                    }
+                    modal.modal("show");
 
                 }
             },
