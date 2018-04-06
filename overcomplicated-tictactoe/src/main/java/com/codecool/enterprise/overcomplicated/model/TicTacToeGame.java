@@ -61,10 +61,6 @@ public class TicTacToeGame {
         if (!board.get(2).equals("") && board.get(2).equals(board.get(4)) && board.get(4).equals(board.get(6))) {
             winnerChar = board.get(2);
         }
-
-        if (winnerChar != null) {
-            emptyBoard();
-        }
         return winnerChar;
     }
 
@@ -75,7 +71,6 @@ public class TicTacToeGame {
                 return false;
             }
         }
-        emptyBoard();
         return true;
     }
 
