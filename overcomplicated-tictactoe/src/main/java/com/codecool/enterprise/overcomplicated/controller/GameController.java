@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URISyntaxException;
+import java.util.HashMap;
 import java.util.Map;
 
 @Controller
@@ -64,22 +65,34 @@ public class GameController {
         return "game";
     }
 
-    @GetMapping(value = "/game-move")
-    public String gameMove(@ModelAttribute("player") Player player, @ModelAttribute("move") int move, Model model) throws URISyntaxException {
+    @GetMapping(value = "/game-move", produces = "application/json")
+    @ResponseBody
+    public String gameMove(@ModelAttribute("player") Player player, @ModelAttribute("move") int move) throws URISyntaxException {
         player.move(move);
-        game.setBoard(aiService.moveAI(game.getBoard()));
         String winner = game.checkWinner();
         Boolean isGameFinished = game.checkIsGameFinished();
-        if (winner != null) {
-            if (winner.equals("O")) {
-                model.addAttribute("winner", "computer");
-            } else if (winner.equals("X")) {
-                model.addAttribute("winner", player.getUserName());
-            }
-        } else if (isGameFinished) {
-            model.addAttribute("finished", true);
+        if (winner == null && !isGameFinished) {
+            game.setBoard(aiService.moveAI(game.getBoard()));
+            winner = game.checkWinner();
+            isGameFinished = game.checkIsGameFinished();
         }
-        return gameView(player, model);
+        Map<String, String> gameMap = new HashMap<>();
+        Gson gson = new Gson();
+        gameMap.put("board", gson.toJson(game.getBoard()));
+        if (winner != null || isGameFinished) {
+            game.emptyBoard();
+            if (isGameFinished) {
+                gameMap.put("finished", "true");
+            }
+            if (winner != null) {
+                if (winner.equals("O")) {
+                    gameMap.put("winner", "computer");
+                } else if (winner.equals("X")) {
+                    gameMap.put("winner", player.getUserName());
+                }
+            }
+        }
+        return gson.toJson(gameMap);
     }
 
     @GetMapping(value = "/new_fun_fact", produces = "application/json")
