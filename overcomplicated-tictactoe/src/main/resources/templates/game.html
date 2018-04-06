@@ -51,14 +51,15 @@
                         <div th:if="${iterStat.index%3==0}" class="row"></div>
                         <div class="col-xs-4">
                             <th:block th:switch="${cell}">
-                                <a th:case="''" th:href="'/game-move?move='+${iterStat.index}"
+                                <a th:case="''" th:id="${iterStat.index}"
                                    class="btn btn-default square">&nbsp;</a>
-                                <a th:case="O" th:href="'/game-move?move='+${iterStat.index}"
-                                   class="btn btn-default square"><em
-                                        class="fa fa-circle-o" aria-hidden="true"></em></a>
-                                <a th:case="X" th:href="'/game-move?move='+${iterStat.index}"
-                                   class="btn btn-default square"><em
-                                        class="fa fa-times" aria-hidden="true"></em></a>
+                                <a th:case="O" th:id="${iterStat.index}"
+                                   class="btn btn-default square fa fa-circle-o inactive">
+                                </a>
+                                <!--th:href="'/game-move?move='+${iterStat.index}" just to save it for later-->
+                                <a th:case="X" th:id="${iterStat.index}"
+                                   class="btn btn-default square fa fa-times inactive">
+                                </a>
                             </th:block>
                         </div>
                     </th:block>
@@ -76,7 +77,7 @@
         </div>
     </div>
 
-    <div th:class="${finished}? 'modal show' : (${winner}? 'modal show' : 'modal fade')">
+    <div id="finish-modal" th:class="${finished}? 'modal show' : (${winner}? 'modal show' : 'modal fade')">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -90,7 +91,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary"><a href="/game">Start new game.</a></button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><a href="/">Close</a></button>
+                    <button type="button" class="btn btn-secondary" ><a href="/">Close</a></button>
                 </div>
             </div>
         </div>
